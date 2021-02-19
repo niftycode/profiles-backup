@@ -1,0 +1,12 @@
+/.DS_Store
+/.idea
+/.vscode
+/.pytest_cache
+/.venv
+
+/build
+/dist
+.DS_Store
+.pytest_cache
+.vscode
+*.pyc
