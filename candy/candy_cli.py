@@ -7,7 +7,7 @@ Backup Thunderbird's Profiles Folder
 Python 3.8+
 Author: @niftycode
 Date created: April 25th, 2020
-Date modified: February 19th, 2021
+Date modified: February 25th, 2021
 """
 
 import sys
@@ -90,6 +90,7 @@ def backup():
         print(f"You can find the backup data in {dst}")
 
 
+"""
 def restore_from_documents():
     documents = '/Users/{0}/Documents/Thunderbird-Backup'.format(getpass.getuser())
 
@@ -104,13 +105,14 @@ def restore_from_documents():
             "Could not find a folder named 'Thunderbird-Backup'!\n "
             "(The 'Profiles' folder must be located in a folder named 'Thunderbird-Backup'.)"
         )
+"""
 
 
-def restore_from_desktop():
-    desktop = '/Users/{0}/Desktop/Thunderbird-Backup'.format(getpass.getuser())
+def restore_from_documents():
+    documents = '/Users/{0}/Documents/Thunderbird-Backup'.format(getpass.getuser())
 
     try:
-        entries = os.listdir(desktop)
+        entries = os.listdir(documents)
         print(f"entries: {entries}")
         count = 1
         backup_list = []
@@ -166,8 +168,8 @@ def restore_data(backup_item: str):
     logging.debug(f"Backup: {backup_item}")
 
     # Get the path of the source folder
-    desktop = '/Users/{0}/Documents/Thunderbird-Backup/'.format(getpass.getuser())
-    src = desktop + backup_item[4:]
+    documents = '/Users/{0}/Documents/Thunderbird-Backup/'.format(getpass.getuser())
+    src = documents + backup_item[4:]
     logging.debug(f"Source folder: {src}")
 
     # Get the path of the destination folder (Thunderbird folder)
@@ -198,26 +200,21 @@ def restore():
     print("Chose the folder your Thunderbird's backup folder is located in:")
     print()
     print("-1- Documents")
-    print("-2- Desktop")
-    # print("-3- External Storage")
-    print("-3- Quit the application")
+    # print("-2- External Storage")
+    print("-2- Quit the application")
     print("--------------------------------------------------------------------")
 
     while True:
         choice = input("Your choice: ")
 
         if choice == '1':
-            # TODO: Search for Thunderbird's default profile in Documents
             restore_from_documents()
             break
-        elif choice == '2':
-            restore_from_desktop()
-            break
-        # elif choice == '3':
+        # elif choice == '2':
             # TODO: Search for external devices
             # print("This option is currently not available.")
             # break
-        elif choice == '3':
+        elif choice == '2':
             quit_application()
         else:
             print("Unknown input! Try again.")
@@ -241,6 +238,7 @@ def user_input():
     print("-3- Restore the default profile")
     print("-4- Show version")
     print("-5- Quit the application")
+    # TODO: Delete 'Clean Data'
     print("-6- Clean Data")  # <- Delete this line in production modes!
     print("----------------------------------------------------------")
 
@@ -261,7 +259,7 @@ def user_input():
             break
         elif choice == '5':
             quit_application()
-        # Delete following choice in production mode!
+        # TODO: Delete choice 6 in production mode!
         elif choice == '6':
             clean_data.delete_old_profiles()
         else:

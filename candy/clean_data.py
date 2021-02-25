@@ -7,19 +7,27 @@ Check for old profiles in the backup folder.
 Python 3.8+
 Author: @niftycode
 Date created: February 19th, 2021
-Date modified: -
+Date modified: February 25th, 2021
 """
 
 import os
 import getpass
+import logging
 from stat import S_ISDIR, ST_ATIME, ST_MODE
+
+logging.basicConfig(level=logging.DEBUG)
 
 
 def delete_old_profiles():
-    desktop = '/Users/{0}/Desktop/Thunderbird-Backup'.format(getpass.getuser())
+    documents = '/Users/{0}/Documents/Thunderbird-Backup'.format(getpass.getuser())
+    logging.debug(documents)
+
+
+    """
+    documents = '/Users/{0}/Documents/Thunderbird-Backup'.format(getpass.getuser())
 
     # Get all entries in the directory
-    entries = (os.path.join(desktop, file_name) for file_name in os.listdir(desktop))
+    entries = (os.path.join(documents, file_name) for file_name in os.listdir(documents))
 
     # for entry in entries:
     #     print(entry)
@@ -35,3 +43,4 @@ def delete_old_profiles():
 
     for i in sorted_list:
         print(i)
+    """
