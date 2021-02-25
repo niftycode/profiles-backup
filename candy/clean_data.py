@@ -18,9 +18,25 @@ from stat import S_ISDIR, ST_ATIME, ST_MODE
 logging.basicConfig(level=logging.DEBUG)
 
 
+def last_4chars(x):
+    return x[-2:]
+
+
 def delete_old_profiles():
     documents = '/Users/{0}/Documents/Thunderbird-Backup'.format(getpass.getuser())
     logging.debug(documents)
+
+    dir_list = os.listdir(documents)
+    print(dir_list)
+
+    # th-02-Feb-2021_14.42
+    # grab last 4 characters of the file name:
+
+    # for i in dir_list:
+
+    new_list = sorted(dir_list, key=last_4chars)
+    for i in new_list:
+        print(i)
 
 
     """

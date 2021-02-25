@@ -76,11 +76,12 @@ def backup():
     backup_folder = 'Thunderbird-Backup/'
     dst = '/Users/{0}/Documents/{1}/'.format(getpass.getuser(),
                                              backup_folder + 'th-' +
-                                             current_date.strftime('%d-%b-%Y_%H.%M'))
+                                             current_date.strftime('%d-%m-%Y'))
+                                             # current_date.strftime('%d-%m-%Y_%H.%M'))
     logging.debug(dst)
 
     try:
-        shutil.copytree(src, dst, symlinks=False)
+        shutil.copytree(src, dst, dirs_exist_ok=True, symlinks=False)
     except OSError as e:
         print(f"Creation of the directory {dst} failed")
         print(f"Error message: {e}")
