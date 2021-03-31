@@ -240,7 +240,7 @@ def user_input():
     print("-4- Show version")
     print("-5- Quit the application")
     # TODO: Delete 'Clean Data'
-    print("-6- Clean Data")  # <- Delete this line in production modes!
+    print("-6- Clean Data")  # <- Delete this line in production mode!
     print("----------------------------------------------------------")
 
     while True:
