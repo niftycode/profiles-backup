@@ -77,7 +77,7 @@ def backup():
     dst = '/Users/{0}/Documents/{1}/'.format(getpass.getuser(),
                                              backup_folder + 'th-' +
                                              current_date.strftime('%d-%m-%Y'))
-                                             # current_date.strftime('%d-%m-%Y_%H.%M'))
+
     logging.debug(dst)
 
     try:
@@ -263,6 +263,7 @@ def user_input():
         # TODO: Delete choice 6 in production mode!
         elif choice == '6':
             clean_data.delete_old_profiles()
+            break
         else:
             print("Unknown input! Try again.")
             continue
