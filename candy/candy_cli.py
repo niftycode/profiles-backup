@@ -7,7 +7,7 @@ Backup Thunderbird's Profiles Folder
 Python 3.8+
 Author: @niftycode
 Date created: April 25th, 2020
-Date modified: February 25th, 2021
+Date modified: April 16th, 2021
 """
 
 import sys
@@ -238,9 +238,8 @@ def user_input():
     print("-2- Backup the default profile")
     print("-3- Restore the default profile")
     print("-4- Show version")
-    print("-5- Quit the application")
-    # TODO: Delete 'Clean Data'
-    print("-6- Clean Data")  # <- Delete this line in production mode!
+    print("-5- Clean up data")
+    print("-6- Quit the application")
     print("----------------------------------------------------------")
 
     while True:
@@ -259,11 +258,11 @@ def user_input():
             info.app_info()
             break
         elif choice == '5':
-            quit_application()
-        # TODO: Delete choice 6 in production mode!
-        elif choice == '6':
             clean_data.delete_old_profiles()
             break
+        elif choice == '6':
+            quit_application()
+
         else:
             print("Unknown input! Try again.")
             continue

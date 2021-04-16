@@ -14,30 +14,34 @@ import os
 import shutil
 import getpass
 import logging
-from pathlib import Path
 
 logging.basicConfig(level=logging.DEBUG)
 
 
+def sorting(director_name):
+    splitup = director_name.split('-')
+    return splitup[3], splitup[2], splitup[1]
+
+
 def delete_old_profiles():
     backup_path = '/Users/{0}/Documents/Thunderbird-Backup'.format(getpass.getuser())
-    paths = sorted(Path(backup_path).iterdir(), key=os.path.getctime)
 
-    temp_paths = []
+    dir_list = os.listdir(backup_path)
 
-    for i in paths:
-        if i.name.startswith("th"):
-            temp_paths.append(i)
+    temp_list = []
 
-    for k in temp_paths:
-        print(k)
+    for i in dir_list:
+        if i.startswith("th"):
+            temp_list.append(i)
 
-    backups_to_delete = len(temp_paths) - 5
-    print(backups_to_delete)
+    temp_list = sorted(temp_list, key=sorting)
 
-    for j in temp_paths:
+    backups_to_delete = len(temp_list) - 5
+
+    for j in temp_list:
         while backups_to_delete > 0:
-            print(f"backup to delete: {j.name}")
-            backup_dir = backup_path + "/" + j.name
-            # shutil.rmtree(backup_dir)
+            print(f"delete backup: {j}")
+            backup_to_delete_dir = backup_path + "/" + j
+            shutil.rmtree(backup_to_delete_dir)
             backups_to_delete -= 1
+            break
