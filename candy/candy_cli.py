@@ -16,10 +16,11 @@ import getpass
 import shutil
 import datetime
 import logging
+
 from distutils.dir_util import copy_tree
-from candy import common_methods
-from candy import info
-from candy import clean_data
+import common_methods
+import info
+import clean_data
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -28,7 +29,8 @@ def check_default_profile():
     """
     Call functions to check the operating system, the profiles folder and
     the path to the user's default folder.
-    :return: A tuple containing the OS, Thunderbird's Profiles folder and the user's xyz.default folder.
+    :return: A tuple containing the OS, Thunderbird's Profiles folder and
+    the user's xyz.default folder.
     """
     operating_system = common_methods.system_info()
     profiles_folder = common_methods.profiles_folder(operating_system)

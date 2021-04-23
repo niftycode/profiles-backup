@@ -6,7 +6,7 @@
 Common methods
 Python 3.7+
 Date created: April 28th, 2020
-Date modified: September 27th, 2020
+Date modified: April 23rd, 2021
 """
 
 import os
@@ -39,7 +39,7 @@ def profiles_folder(installed_os):
     """
     platform_paths = {
         'Windows 10': 'C:\\Users\\{0}\\AppData\\Local\\Thunderbird\\'.format(getpass.getuser()),
-        'Linux': '/home/{0}/.thunderbrid/'.format(getpass.getuser()),
+        'Linux': '/home/{0}/.thunderbird/'.format(getpass.getuser()),
         'Darwin': '/Users/{0}/Library/Thunderbird/'.format(getpass.getuser())}
 
     if installed_os == 'macOS':
