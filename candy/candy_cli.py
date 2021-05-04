@@ -64,6 +64,9 @@ def backup():
         print("Thunderbird is running! Quit Thunderbird and restart this program.")
         sys.exit()
 
+    # Check for old Backups and delete them
+    clean_data.delete_old_profiles()
+
     # Get the path of the source folder (Thunderbird folder)
     _, src, _ = check_default_profile()
     logging.debug(f"Source folder: {src}")
@@ -93,25 +96,13 @@ def backup():
         print(f"You can find the backup data in {dst}")
 
 
-"""
 def restore_from_documents():
-    documents = '/Users/{0}/Documents/Thunderbird-Backup'.format(getpass.getuser())
+    # Check if thunderbird is running
+    is_running = common_methods.check_process()
+    if is_running:
+        print("Thunderbird is running! Quit Thunderbird and restart this program.")
+        return
 
-    try:
-        for item in os.listdir(documents):
-            if os.path.isdir(os.path.join(documents, item)) and 'default' in item:
-                print(os.path.join(documents, item))
-                # return os.path.join(desktop, item)
-    except FileNotFoundError as e:
-        print(f"Error message: {e}")
-        sys.exit(
-            "Could not find a folder named 'Thunderbird-Backup'!\n "
-            "(The 'Profiles' folder must be located in a folder named 'Thunderbird-Backup'.)"
-        )
-"""
-
-
-def restore_from_documents():
     documents = '/Users/{0}/Documents/Thunderbird-Backup'.format(getpass.getuser())
 
     try:
@@ -191,41 +182,9 @@ def restore_data(backup_item: str):
         print(f"You can find the backup data in {dst}")
 
 
-def restore():
-    # Check if thunderbird is running
-    is_running = common_methods.check_process()
-    if is_running:
-        print("Thunderbird is running! Quit Thunderbird and restart this program.")
-        return
-
-    print()
-    print("--------------------------------------------------------------------")
-    print("Chose the folder your Thunderbird's backup folder is located in:")
-    print()
-    print("-1- Documents")
-    # print("-2- External Storage")
-    print("-2- Quit the application")
-    print("--------------------------------------------------------------------")
-
-    while True:
-        choice = input("Your choice: ")
-
-        if choice == '1':
-            restore_from_documents()
-            break
-        # elif choice == '2':
-            # TODO: Search for external devices
-            # print("This option is currently not available.")
-            # break
-        elif choice == '2':
-            quit_application()
-        else:
-            print("Unknown input! Try again.")
-            continue
-
-
 def quit_application():
-    sys.exit("Good bye!")
+    print("Good bye!")
+    sys.exit()
 
 
 def user_input():
@@ -240,8 +199,7 @@ def user_input():
     print("-2- Backup the default profile")
     print("-3- Restore the default profile")
     print("-4- Show version")
-    print("-5- Clean up data")
-    print("-6- Quit the application")
+    print("-5- Quit the application")
     print("----------------------------------------------------------")
 
     while True:
@@ -254,15 +212,12 @@ def user_input():
             backup()
             break
         elif choice == '3':
-            restore()
+            restore_from_documents()
             break
         elif choice == '4':
             info.app_info()
             break
         elif choice == '5':
-            clean_data.delete_old_profiles()
-            break
-        elif choice == '6':
             quit_application()
 
         else:
