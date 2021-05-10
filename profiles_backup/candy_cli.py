@@ -7,7 +7,7 @@ Backup Thunderbird's Profiles Folder
 Python 3.8+
 Author: @niftycode
 Date created: April 25th, 2020
-Date modified: April 16th, 2021
+Date modified: May 10th, 2021
 """
 
 import sys
@@ -16,11 +16,10 @@ import getpass
 import shutil
 import datetime
 import logging
-
 from distutils.dir_util import copy_tree
-import common_methods
-import info
-import clean_data
+from profiles_backup import common_methods
+from profiles_backup import info
+from profiles_backup import clean_data
 
 logging.basicConfig(level=logging.DEBUG)
 

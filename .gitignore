@@ -10,3 +10,7 @@
 .pytest_cache
 .vscode
 *.pyc
+
+docs/build/doctrees/
+
+docs/build/html/
