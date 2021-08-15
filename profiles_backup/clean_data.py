@@ -7,15 +7,15 @@ Check for old profiles in the backup folder.
 Python 3.8+
 Author: @niftycode
 Date created: February 19th, 2021
-Date modified: April 16th, 2021
+Date modified: August 5th, 2021
 """
 
-import os
-import shutil
 import getpass
 import logging
+import os
+import shutil
 
-logging.basicConfig(level=logging.DEBUG)
+from profiles_backup import common_methods
 
 
 def sorting(director_name):
@@ -24,24 +24,34 @@ def sorting(director_name):
 
 
 def delete_old_profiles():
-    backup_path = '/Users/{0}/Documents/Thunderbird-Backup'.format(getpass.getuser())
 
-    dir_list = os.listdir(backup_path)
+    # Current operating system
+    operating_system = common_methods.system_info()
 
-    temp_list = []
+    # Path to the backup directory
+    backup_path = common_methods.backup_directory(operating_system)
 
-    for i in dir_list:
-        if i.startswith("th"):
-            temp_list.append(i)
+    # Check if backup directory exists
+    if os.path.isdir(backup_path):
+        dir_list = os.listdir(backup_path)
 
-    temp_list = sorted(temp_list, key=sorting)
+        temp_list = []
 
-    backups_to_delete = len(temp_list) - 5
+        for i in dir_list:
+            if i.startswith("th"):
+                temp_list.append(i)
 
-    for j in temp_list:
-        while backups_to_delete > 0:
-            print(f"delete backup: {j}")
-            backup_to_delete_dir = backup_path + "/" + j
-            shutil.rmtree(backup_to_delete_dir)
-            backups_to_delete -= 1
-            break
+        temp_list = sorted(temp_list, key=sorting)
+
+        backups_to_delete = len(temp_list) - 5
+
+        for j in temp_list:
+            while backups_to_delete > 0:
+                print(f"delete backup: {j}")
+                backup_to_delete_dir = backup_path + "/" + j
+                shutil.rmtree(backup_to_delete_dir)
+                backups_to_delete -= 1
+                break
+
+    else:
+        print("A backup directory doesn't exists. Nothing to clean up!")

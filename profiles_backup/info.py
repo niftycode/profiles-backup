@@ -6,12 +6,12 @@
 App info, license, version
 Python 3.7+
 Date created: May 27th, 2020
-Date modified: September 27th, 2020
+Date modified: August 5th, 2021
 """
 
 import sys
 
-VERSION = '0.0.3'
+VERSION = '0.0.4'
 
 
 def app_info():
