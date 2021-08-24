@@ -5,41 +5,41 @@
 """
 Backup Thunderbird's Profiles Folder
 Python 3.8+
-Author: @niftycode
 Date created: April 25th, 2020
-Date modified: May 10th, 2021
+Date modified: August 6th, 2021
 """
 
-import sys
-import os
-import getpass
-import shutil
 import datetime
+import getpass
 import logging
+import os
+import shutil
+import sys
 from distutils.dir_util import copy_tree
-from profiles_backup import common_methods
-from profiles_backup import info
-from profiles_backup import clean_data
+
+from profiles_backup import clean_data, common_methods, info
 
 logging.basicConfig(level=logging.DEBUG)
 
 
-def check_default_profile():
+def check_default_profile() -> tuple:
     """
-    Call functions to check the operating system, the profiles folder and
-    the path to the user's default folder.
+    Call functions to check the operating system, Thunderbird's directory and
+    the path to the user's default-release directory.
     :return: A tuple containing the OS, Thunderbird's Profiles folder and
     the user's xyz.default folder.
     """
+
     operating_system = common_methods.system_info()
-    profiles_folder = common_methods.profiles_folder(operating_system)
-    default_folder = common_methods.check_default_folder(profiles_folder)
+    thunderbird_dir = common_methods.thunderbird_directory(operating_system)
+    default_release_dir = common_methods.default_release_directory(
+        operating_system)
 
     logging.debug(operating_system)
-    logging.debug(profiles_folder)
-    logging.debug(default_folder)
+    logging.debug(thunderbird_dir)
+    logging.debug(default_release_dir)
 
-    return operating_system, profiles_folder, default_folder
+    return operating_system, thunderbird_dir, default_release_dir
 
 
 def show_default_path():
@@ -56,6 +56,11 @@ def show_default_path():
 
 
 def backup():
+    """
+    If necessary, create the 'Thunderbird-Backup' directory in the user's
+    Documents directory and copy all user data into this directory.
+    The default directory can be recognized by the 'default-release' suffix.
+    """
 
     # Check if thunderbird is running
     is_running = common_methods.check_process()
@@ -70,22 +75,25 @@ def backup():
     _, src, _ = check_default_profile()
     logging.debug(f"Source folder: {src}")
 
-    # Just for debugging...
-    # default_folder = os.path.basename(os.path.normpath(src))
-    # logging.debug(default_folder)
-
     # Get current date and time
     current_date = datetime.datetime.now()
 
+    # Current operating system
+    operating_system = common_methods.system_info()
+
+    # Path to the Documents directory
+    documents = common_methods.documents_directory(operating_system)
+
+    # src = common_methods.default_release_directory(operating_system)
+
     backup_folder = 'Thunderbird-Backup/'
-    dst = '/Users/{0}/Documents/{1}/'.format(getpass.getuser(),
-                                             backup_folder + 'th-' +
-                                             current_date.strftime('%d-%m-%Y'))
+    dst = documents + backup_folder + 'th-' + current_date.strftime('%d-%m-%Y')
 
     logging.debug(dst)
 
     try:
-        shutil.copytree(src, dst, dirs_exist_ok=True, symlinks=False)
+        shutil.copytree(src, dst, dirs_exist_ok=True, symlinks=False,
+                        ignore=shutil.ignore_patterns('*.ini', '*.default'))
     except OSError as e:
         print(f"Creation of the directory {dst} failed")
         print(f"Error message: {e}")
@@ -102,7 +110,8 @@ def restore_from_documents():
         print("Thunderbird is running! Quit Thunderbird and restart this program.")
         return
 
-    documents = '/Users/{0}/Documents/Thunderbird-Backup'.format(getpass.getuser())
+    documents = '/Users/{0}/Documents/Thunderbird-Backup'.format(
+        getpass.getuser())
 
     try:
         entries = os.listdir(documents)
@@ -161,7 +170,8 @@ def restore_data(backup_item: str):
     logging.debug(f"Backup: {backup_item}")
 
     # Get the path of the source folder
-    documents = '/Users/{0}/Documents/Thunderbird-Backup/'.format(getpass.getuser())
+    documents = '/Users/{0}/Documents/Thunderbird-Backup/'.format(
+        getpass.getuser())
     src = documents + backup_item[4:]
     logging.debug(f"Source folder: {src}")
 
@@ -228,6 +238,7 @@ def main():
     """
     The entry point of this program.
     """
+
     user_input()
 
 
