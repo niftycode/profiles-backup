@@ -52,7 +52,7 @@ def thunderbird_directory(installed_os):
     return thunderbird_path
 
 
-def default_release_directory(installed_os) -> str:
+def default_release_directory(installed_os):
     """
     Return the path to the profiles directory.
     This is the directory where the default-release directory is located in.
