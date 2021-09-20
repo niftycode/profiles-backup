@@ -17,7 +17,7 @@ import sys
 import psutil
 
 
-def system_info():
+def system_info() -> str:
     """
     Check the running operating system.
     :return: Operating system name (and Windows version).

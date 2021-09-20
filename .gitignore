@@ -3,17 +3,15 @@
 /.vscode
 /.pytest_cache
 /.venv
+/.tox
 
 /build
 /dist
+/docs
 .DS_Store
 .pytest_cache
 .vscode
 *.pyc
+tox.ini
 
-docs/build/doctrees/
-
-docs/build/html/
-
-docs/build/
 profiles_backup.egg-info/

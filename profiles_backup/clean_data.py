@@ -5,17 +5,14 @@
 """
 Check for old profiles in the backup folder.
 Python 3.8+
-Author: @niftycode
 Date created: February 19th, 2021
 Date modified: August 5th, 2021
 """
 
-import getpass
-import logging
 import os
 import shutil
 
-from profiles_backup import common_methods
+from profiles_backup import common
 
 
 def sorting(director_name):
@@ -26,10 +23,10 @@ def sorting(director_name):
 def delete_old_profiles():
 
     # Current operating system
-    operating_system = common_methods.system_info()
+    operating_system = common.system_info()
 
     # Path to the backup directory
-    backup_path = common_methods.backup_directory(operating_system)
+    backup_path = common.backup_directory(operating_system)
 
     # Check if backup directory exists
     if os.path.isdir(backup_path):

@@ -17,7 +17,7 @@ import shutil
 import sys
 from distutils.dir_util import copy_tree
 
-from profiles_backup import clean_data, common_methods, info
+from profiles_backup import clean_data, common, info
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -30,9 +30,9 @@ def check_default_profile() -> tuple:
     the user's xyz.default folder.
     """
 
-    operating_system = common_methods.system_info()
-    thunderbird_dir = common_methods.thunderbird_directory(operating_system)
-    default_release_dir = common_methods.default_release_directory(
+    operating_system = common.system_info()
+    thunderbird_dir = common.thunderbird_directory(operating_system)
+    default_release_dir = common.default_release_directory(
         operating_system)
 
     logging.debug(operating_system)
@@ -43,7 +43,7 @@ def check_default_profile() -> tuple:
 
 
 def show_default_path():
-    common_methods.check_process()
+    common.check_process()
     operating_system, _, default_folder = check_default_profile()
 
     print()
@@ -63,7 +63,7 @@ def backup():
     """
 
     # Check if thunderbird is running
-    is_running = common_methods.check_process()
+    is_running = common.check_process()
     if is_running:
         print("Thunderbird is running! Quit Thunderbird and restart this program.")
         sys.exit()
@@ -79,10 +79,10 @@ def backup():
     current_date = datetime.datetime.now()
 
     # Current operating system
-    operating_system = common_methods.system_info()
+    operating_system = common.system_info()
 
     # Path to the Documents directory
-    documents = common_methods.documents_directory(operating_system)
+    documents = common.documents_directory(operating_system)
 
     # src = common_methods.default_release_directory(operating_system)
 
@@ -105,7 +105,7 @@ def backup():
 
 def restore_from_documents():
     # Check if thunderbird is running
-    is_running = common_methods.check_process()
+    is_running = common.check_process()
     if is_running:
         print("Thunderbird is running! Quit Thunderbird and restart this program.")
         return
