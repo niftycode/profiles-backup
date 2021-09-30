@@ -72,7 +72,7 @@ def backup():
     clean_data.delete_old_profiles()
 
     # Get the path of the source folder (Thunderbird folder)
-    _, src, _ = check_default_profile()
+    _, _, src = check_default_profile()
     logging.debug(f"Source folder: {src}")
 
     # Get current date and time

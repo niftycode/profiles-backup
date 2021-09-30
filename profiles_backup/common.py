@@ -76,7 +76,7 @@ def default_release_directory(installed_os):
     try:
         for item in os.listdir(profiles_path):
             if os.path.isdir(os.path.join(profiles_path, item)) and 'release' in item:
-                return os.path.join(profiles_path, item)
+                return os.path.join(profiles_path)
     except FileNotFoundError as e:
         print(e)
         sys.exit(
