@@ -20,15 +20,18 @@ import psutil
 def system_info() -> str:
     """
     Check the running operating system.
-    :return: Operating system name (and Windows version).
+    :return: Operating system (and Windows version).
     """
+    operating_system = 'None'
+
     if platform.system() == 'Darwin':
-        return 'macOS'
+        operating_system = 'macOS'
     elif platform.system() == 'Linux':
-        return 'Linux'
+        operating_system = 'Linux'
     elif platform.system() == 'Windows':
-        version = platform.system() + " " + platform.release()
-        return version
+        operating_system = platform.system() + " " + platform.release()
+
+    return operating_system
 
 
 def thunderbird_directory(installed_os):
