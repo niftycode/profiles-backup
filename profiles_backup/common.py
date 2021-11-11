@@ -12,6 +12,7 @@ Date modified: August 6th, 2021
 import getpass
 import os
 import platform
+# import string
 import sys
 
 import psutil
@@ -34,7 +35,7 @@ def system_info() -> str:
     return operating_system
 
 
-def thunderbird_directory(installed_os):
+def thunderbird_directory(installed_os) -> str:
     """
     Returns the path to the Thunderbird directory
     :param installed_os: The installed operating system
@@ -88,7 +89,7 @@ def default_release_directory(installed_os):
         )
 
 
-def backup_directory(installed_os):
+def backup_directory(installed_os) -> str:
     """
     Returns the path to the backup directory depending on the operating system.
     :param installed_os: The installed operating system

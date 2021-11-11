@@ -104,7 +104,12 @@ def backup():
 
 
 def restore_from_documents():
-    # Check if thunderbird is running
+    """
+    Check if Thunderbird is not running,
+    show available backups and
+    let the user chose a saved Profiles folder.
+    (Invoke the 'restore_data()' function.)
+    """
     is_running = common.check_process()
     if is_running:
         print("Thunderbird is running! Quit Thunderbird and restart this program.")
@@ -134,7 +139,7 @@ def restore_from_documents():
         print("----------------------------------------------------------")
 
         while True:
-            choice = input("Your choice: ")
+            choice = input('Your choice: ')
 
             if choice == '1':
                 restore_data(backup_list[0])
@@ -165,7 +170,13 @@ def restore_from_documents():
         )
 
 
-def restore_data(backup_item: str):
+def restore_data(backup_item: str) -> None:
+    """Restore a backuped Profiles folder.
+
+    Args:
+        backup_item (str): The name of the folder, saved
+        in the directory 'Thunderbird-Backup'.
+    """
     logging.debug("Restore data...")
     logging.debug(f"Backup: {backup_item}")
 
@@ -192,6 +203,8 @@ def restore_data(backup_item: str):
 
 
 def quit_application():
+    """Quit the application.
+    """
     print("Good bye!")
     sys.exit()
 
