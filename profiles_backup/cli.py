@@ -84,8 +84,6 @@ def backup():
     # Path to the Documents directory
     documents = common.documents_directory(operating_system)
 
-    # src = common_methods.default_release_directory(operating_system)
-
     backup_folder = 'Thunderbird-Backup/'
     dst = documents + backup_folder + 'th-' + current_date.strftime('%d-%m-%Y')
 
@@ -165,8 +163,8 @@ def restore_from_documents():
     except FileNotFoundError as e:
         print(f"Error message: {e}")
         sys.exit(
-            "Could not find a folder named 'Thunderbird-Backup'!\n "
-            "(The 'Profiles' folder must be located in a folder named 'Thunderbird-Backup'.)"
+            "Could not find a directory named 'Thunderbird-Backup'!\n "
+            "(The backuped profiles must be located in a directory named 'Thunderbird-Backup'.)"
         )
 
 
@@ -205,7 +203,7 @@ def restore_data(backup_item: str) -> None:
 def quit_application():
     """Quit the application.
     """
-    print("Good bye!")
+    print("Goodbye!")
     sys.exit()
 
 
