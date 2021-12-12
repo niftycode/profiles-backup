@@ -98,7 +98,7 @@ def backup():
                         ignore=shutil.ignore_patterns('*.ini', '*.default'))
     except OSError as ex:
         print(f"Creation of the directory {dst} failed")
-        print(f"Error message: {e}")
+        print(f"Error message: {ex}")
         sys.exit("Program terminated!")
     else:
         print("Successfully created the backup!")
