@@ -43,6 +43,10 @@ def check_default_profile() -> tuple:
 
 
 def show_default_path():
+    """
+    Invoke check_process() to get the operating system and
+    the default directory.
+    """
     common.check_process()
     operating_system, _, default_folder = check_default_profile()
 
@@ -92,7 +96,7 @@ def backup():
     try:
         shutil.copytree(src, dst, dirs_exist_ok=True, symlinks=False,
                         ignore=shutil.ignore_patterns('*.ini', '*.default'))
-    except OSError as e:
+    except OSError as ex:
         print(f"Creation of the directory {dst} failed")
         print(f"Error message: {e}")
         sys.exit("Program terminated!")
