@@ -58,17 +58,15 @@ def thunderbird_directory(installed_os) -> str:
 
 def default_release_directory(installed_os):
     """
-    Return the path to the profiles directory.
-    This is the directory where the default-release directory is located in.
-    :param installed_os: The installed operating system
-    :return: The directory containing the default-release directory
+    Return the path to the default-release directory.
+    This is the default profile located in the Profiles directory.
+    :param installed_os: The installed operating system.
+    :return: The path to the default-release directory.
     """
     platform_paths = {
         'Windows 10': 'C:\\Users\\{0}\\AppData\\Local\\Thunderbird\\Profiles\\'.format(getpass.getuser()),
         'Linux': '/home/{0}/.thunderbird/'.format(getpass.getuser()),
         'Darwin': '/Users/{0}/Library/Thunderbird/Profiles/'.format(getpass.getuser())}
-
-    profiles_path = None
 
     if installed_os == 'macOS':
         profiles_path = platform_paths['Darwin']
@@ -77,10 +75,14 @@ def default_release_directory(installed_os):
     else:
         profiles_path = platform_paths['Windows 10']
 
+    for item in os.listdir(profiles_path):
+        print(f"ITEMS: {item}")
+
     try:
         for item in os.listdir(profiles_path):
-            if os.path.isdir(os.path.join(profiles_path, item)) and 'release' in item:
-                return os.path.join(profiles_path)
+            if os.path.isdir(os.path.join(profiles_path, item)) and 'default-release' in item:
+                return os.path.join(profiles_path)  # Path to the default-release dir
+    # TODO: Error Handling
     except FileNotFoundError as e:
         print(e)
         sys.exit(

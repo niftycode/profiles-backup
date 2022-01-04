@@ -35,9 +35,9 @@ def check_default_profile() -> tuple:
     default_release_dir = common.default_release_directory(
         operating_system)
 
-    logging.debug(operating_system)
-    logging.debug(thunderbird_dir)
-    logging.debug(default_release_dir)
+    logging.debug(f"OS: {operating_system}")
+    logging.debug(f"Thunderbird directory: {thunderbird_dir}")
+    logging.debug(f"Profiles directory: {default_release_dir}")
 
     return operating_system, thunderbird_dir, default_release_dir
 
@@ -53,7 +53,7 @@ def show_default_path():
     print()
     print("--------------------------------------------------------------")
     print(f"You are running a {operating_system} system.")
-    print("Your default profiles folder is located in:")
+    print("Your default profile folder is located in:")
     print(f"{default_folder}")
     print("--------------------------------------------------------------")
     print()
@@ -96,9 +96,9 @@ def backup():
     try:
         shutil.copytree(src, dst, dirs_exist_ok=True, symlinks=False,
                         ignore=shutil.ignore_patterns('*.ini', '*.default'))
-    except OSError as ex:
+    except OSError as e:
         print(f"Creation of the directory {dst} failed")
-        print(f"Error message: {ex}")
+        print(f"Error message: {e}")
         sys.exit("Program terminated!")
     else:
         print("Successfully created the backup!")
@@ -109,7 +109,7 @@ def restore_from_documents():
     """
     Check if Thunderbird is not running,
     show available backups and
-    let the user chose a saved Profiles folder.
+    let the user chose a saved profile folder.
     (Invoke the 'restore_data()' function.)
     """
     is_running = common.check_process()
