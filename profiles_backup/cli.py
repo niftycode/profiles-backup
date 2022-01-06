@@ -53,7 +53,7 @@ def show_default_path():
     print()
     print("--------------------------------------------------------------")
     print(f"You are running a {operating_system} system.")
-    print("Your default profile folder is located in:")
+    print("Your default profile directory is located in:")
     print(f"{default_folder}")
     print("--------------------------------------------------------------")
     print()

@@ -12,7 +12,6 @@ Date modified: August 6th, 2021
 import getpass
 import os
 import platform
-# import string
 import sys
 
 import psutil
@@ -82,7 +81,6 @@ def default_release_directory(installed_os):
         for item in os.listdir(profiles_path):
             if os.path.isdir(os.path.join(profiles_path, item)) and 'default-release' in item:
                 return os.path.join(profiles_path)  # Path to the default-release dir
-    # TODO: Error Handling
     except FileNotFoundError as e:
         print(e)
         sys.exit(
