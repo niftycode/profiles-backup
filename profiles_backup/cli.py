@@ -15,7 +15,7 @@ import logging
 import os
 import shutil
 import sys
-from distutils.dir_util import copy_tree
+from distutils.dir_util import copy_tree  # TODO: copy_tree is deprecated
 
 from profiles_backup import clean_data, common, info
 
