@@ -2,7 +2,7 @@
 # or a module in the packege is imported.
 #
 
-'''
+"""
 from .cli import (
     quit_application,
     user_input,
@@ -12,4 +12,4 @@ from .cli import (
     show_default_path,
     check_default_profile
 )
-'''
+"""

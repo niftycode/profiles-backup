@@ -16,7 +16,7 @@ from profiles_backup import common
 
 
 def sorting(director_name) -> tuple:
-    splitup = director_name.split('-')
+    splitup = director_name.split("-")
     return splitup[3], splitup[2], splitup[1]
 
 
@@ -35,7 +35,7 @@ def delete_old_profiles() -> None:
         temp_list = []
 
         for i in dir_list:
-            if i.startswith('th'):
+            if i.startswith("th"):
                 temp_list.append(i)
 
         temp_list = sorted(temp_list, key=sorting)
@@ -45,7 +45,7 @@ def delete_old_profiles() -> None:
         for j in temp_list:
             while backups_to_delete > 0:
                 print(f"delete backup: {j}")
-                backup_to_delete_dir = backup_path + '/' + j
+                backup_to_delete_dir = backup_path + "/" + j
                 shutil.rmtree(backup_to_delete_dir)
                 backups_to_delete -= 1
                 break

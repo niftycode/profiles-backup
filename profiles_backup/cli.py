@@ -32,8 +32,7 @@ def check_default_profile() -> tuple:
 
     operating_system = common.system_info()
     thunderbird_dir = common.thunderbird_directory(operating_system)
-    default_release_dir = common.default_release_directory(
-        operating_system)
+    default_release_dir = common.default_release_directory(operating_system)
 
     logging.debug(f"OS: {operating_system}")
     logging.debug(f"Thunderbird directory: {thunderbird_dir}")
@@ -88,14 +87,19 @@ def backup():
     # Path to the Documents directory
     documents = common.documents_directory(operating_system)
 
-    backup_folder = 'Thunderbird-Backup/'
-    dst = documents + backup_folder + 'th-' + current_date.strftime('%d-%m-%Y')
+    backup_folder = "Thunderbird-Backup/"
+    dst = documents + backup_folder + "th-" + current_date.strftime("%d-%m-%Y")
 
     logging.debug(dst)
 
     try:
-        shutil.copytree(src, dst, dirs_exist_ok=True, symlinks=False,
-                        ignore=shutil.ignore_patterns('*.ini', '*.default'))
+        shutil.copytree(
+            src,
+            dst,
+            dirs_exist_ok=True,
+            symlinks=False,
+            ignore=shutil.ignore_patterns("*.ini", "*.default"),
+        )
     except OSError as e:
         print(f"Creation of the directory {dst} failed")
         print(f"Error message: {e}")
@@ -117,8 +121,7 @@ def restore_from_documents():
         print("Thunderbird is running! Quit Thunderbird and restart this program.")
         return
 
-    documents = '/Users/{0}/Documents/Thunderbird-Backup'.format(
-        getpass.getuser())
+    documents = "/Users/{0}/Documents/Thunderbird-Backup".format(getpass.getuser())
 
     try:
         entries = os.listdir(documents)
@@ -126,7 +129,7 @@ def restore_from_documents():
         count = 1
         backup_list = []
         for entry in entries:
-            if entry.startswith('t'):
+            if entry.startswith("t"):
                 backup_list.append(f"-{count}- {entry}")
                 count += 1
 
@@ -141,24 +144,24 @@ def restore_from_documents():
         print("----------------------------------------------------------")
 
         while True:
-            choice = input('Your choice: ')
+            choice = input("Your choice: ")
 
-            if choice == '1':
+            if choice == "1":
                 restore_data(backup_list[0])
                 break
-            elif choice == '2':
+            elif choice == "2":
                 restore_data(backup_list[1])
                 break
-            elif choice == '3':
+            elif choice == "3":
                 restore_data(backup_list[2])
                 break
-            elif choice == '4':
+            elif choice == "4":
                 restore_data(backup_list[3])
                 break
-            elif choice == '5':
+            elif choice == "5":
                 restore_data(backup_list[4])
                 break
-            elif choice == 'q':
+            elif choice == "q":
                 quit_application()
             else:
                 print("Unknown input! Try again.")
@@ -168,7 +171,7 @@ def restore_from_documents():
         print(f"Error message: {e}")
         sys.exit(
             "Could not find a directory named 'Thunderbird-Backup'!\n "
-            "(The backuped profiles must be located in a directory named 'Thunderbird-Backup'.)"
+            "(The backed up profiles must be located in a directory named 'Thunderbird-Backup'.)"
         )
 
 
@@ -183,8 +186,7 @@ def restore_data(backup_item: str) -> None:
     logging.debug(f"Backup: {backup_item}")
 
     # Get the path of the source folder
-    documents = '/Users/{0}/Documents/Thunderbird-Backup/'.format(
-        getpass.getuser())
+    documents = "/Users/{0}/Documents/Thunderbird-Backup/".format(getpass.getuser())
     src = documents + backup_item[4:]
     logging.debug(f"Source folder: {src}")
 
@@ -205,8 +207,7 @@ def restore_data(backup_item: str) -> None:
 
 
 def quit_application():
-    """Quit the application.
-    """
+    """Quit the application."""
     print("Goodbye!")
     sys.exit()
 
@@ -229,19 +230,19 @@ def user_input():
     while True:
         choice = input("Your choice: ")
 
-        if choice == '1':
+        if choice == "1":
             show_default_path()
             break
-        elif choice == '2':
+        elif choice == "2":
             backup()
             break
-        elif choice == '3':
+        elif choice == "3":
             restore_from_documents()
             break
-        elif choice == '4':
+        elif choice == "4":
             info.app_info()
             break
-        elif choice == '5':
+        elif choice == "5":
             quit_application()
 
         else:
@@ -257,5 +258,5 @@ def main():
     user_input()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

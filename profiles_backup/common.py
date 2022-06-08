@@ -22,13 +22,13 @@ def system_info() -> str:
     Check the running operating system.
     :return: Operating system (and Windows version).
     """
-    operating_system = 'None'
+    operating_system = "None"
 
-    if platform.system() == 'Darwin':
-        operating_system = 'macOS'
-    elif platform.system() == 'Linux':
-        operating_system = 'Linux'
-    elif platform.system() == 'Windows':
+    if platform.system() == "Darwin":
+        operating_system = "macOS"
+    elif platform.system() == "Linux":
+        operating_system = "Linux"
+    elif platform.system() == "Windows":
         operating_system = platform.system() + " " + platform.release()
 
     return operating_system
@@ -41,16 +41,19 @@ def thunderbird_directory(installed_os) -> str:
     :return: Thunderbird's directory
     """
     platform_paths = {
-        'Windows 10': 'C:\\Users\\{0}\\AppData\\Local\\Thunderbird\\'.format(getpass.getuser()),
-        'Linux': '/home/{0}/.thunderbird/'.format(getpass.getuser()),
-        'Darwin': '/Users/{0}/Library/Thunderbird/'.format(getpass.getuser())}
+        "Windows 10": "C:\\Users\\{0}\\AppData\\Local\\Thunderbird\\".format(
+            getpass.getuser()
+        ),
+        "Linux": "/home/{0}/.thunderbird/".format(getpass.getuser()),
+        "Darwin": "/Users/{0}/Library/Thunderbird/".format(getpass.getuser()),
+    }
 
-    if installed_os == 'macOS':
-        thunderbird_path = platform_paths['Darwin']
-    elif installed_os == 'Linux':
-        thunderbird_path = platform_paths['Linux']
+    if installed_os == "macOS":
+        thunderbird_path = platform_paths["Darwin"]
+    elif installed_os == "Linux":
+        thunderbird_path = platform_paths["Linux"]
     else:
-        thunderbird_path = platform_paths['Windows 10']
+        thunderbird_path = platform_paths["Windows 10"]
 
     return thunderbird_path
 
@@ -63,23 +66,29 @@ def default_release_directory(installed_os):
     :return: The path to the default-release directory.
     """
     platform_paths = {
-        'Windows 10': 'C:\\Users\\{0}\\AppData\\Local\\Thunderbird\\Profiles\\'.format(getpass.getuser()),
-        'Linux': '/home/{0}/.thunderbird/'.format(getpass.getuser()),
-        'Darwin': '/Users/{0}/Library/Thunderbird/Profiles/'.format(getpass.getuser())}
+        "Windows 10": "C:\\Users\\{0}\\AppData\\Local\\Thunderbird\\Profiles\\".format(
+            getpass.getuser()
+        ),
+        "Linux": "/home/{0}/.thunderbird/".format(getpass.getuser()),
+        "Darwin": "/Users/{0}/Library/Thunderbird/Profiles/".format(getpass.getuser()),
+    }
 
-    if installed_os == 'macOS':
-        profiles_path = platform_paths['Darwin']
-    elif installed_os == 'Linux':
-        profiles_path = platform_paths['Linux']
+    if installed_os == "macOS":
+        profiles_path = platform_paths["Darwin"]
+    elif installed_os == "Linux":
+        profiles_path = platform_paths["Linux"]
     else:
-        profiles_path = platform_paths['Windows 10']
+        profiles_path = platform_paths["Windows 10"]
 
     for item in os.listdir(profiles_path):
         print(f"ITEMS: {item}")
 
     try:
         for item in os.listdir(profiles_path):
-            if os.path.isdir(os.path.join(profiles_path, item)) and 'default-release' in item:
+            if (
+                os.path.isdir(os.path.join(profiles_path, item))
+                and "default-release" in item
+            ):
                 return os.path.join(profiles_path)  # Path to the default-release dir
     except FileNotFoundError as e:
         print(e)
@@ -96,16 +105,19 @@ def backup_directory(installed_os) -> str:
     :return: The backup directory located in the user's Documents directory.
     """
     platform_paths = {
-        'Windows 10': 'C:\\Users\\{0}\\Documents\\Thunderbird-Backup\\'.format(getpass.getuser()),
-        'Linux': '/home/{0}/Documents/Thunderbird-Backup/'.format(getpass.getuser()),
-        'Darwin': '/Users/{0}/Documents/Thunderbird-Backup/'.format(getpass.getuser())}
+        "Windows 10": "C:\\Users\\{0}\\Documents\\Thunderbird-Backup\\".format(
+            getpass.getuser()
+        ),
+        "Linux": "/home/{0}/Documents/Thunderbird-Backup/".format(getpass.getuser()),
+        "Darwin": "/Users/{0}/Documents/Thunderbird-Backup/".format(getpass.getuser()),
+    }
 
-    if installed_os == 'macOS':
-        backup_path = platform_paths['Darwin']
-    elif installed_os == 'Linux':
-        backup_path = platform_paths['Linux']
+    if installed_os == "macOS":
+        backup_path = platform_paths["Darwin"]
+    elif installed_os == "Linux":
+        backup_path = platform_paths["Linux"]
     else:
-        backup_path = platform_paths['Windows 10']
+        backup_path = platform_paths["Windows 10"]
 
     return backup_path
 
@@ -117,16 +129,17 @@ def documents_directory(installed_os):
     :return: The user's Documents directory.
     """
     platform_paths = {
-        'Windows 10': 'C:\\Users\\{0}\\Documents\\'.format(getpass.getuser()),
-        'Linux': '/home/{0}/Documents/'.format(getpass.getuser()),
-        'Darwin': '/Users/{0}/Documents/'.format(getpass.getuser())}
+        "Windows 10": "C:\\Users\\{0}\\Documents\\".format(getpass.getuser()),
+        "Linux": "/home/{0}/Documents/".format(getpass.getuser()),
+        "Darwin": "/Users/{0}/Documents/".format(getpass.getuser()),
+    }
 
-    if installed_os == 'macOS':
-        directory_path = platform_paths['Darwin']
-    elif installed_os == 'Linux':
-        directory_path = platform_paths['Linux']
+    if installed_os == "macOS":
+        directory_path = platform_paths["Darwin"]
+    elif installed_os == "Linux":
+        directory_path = platform_paths["Linux"]
     else:
-        directory_path = platform_paths['Windows 10']
+        directory_path = platform_paths["Windows 10"]
 
     return directory_path
 
