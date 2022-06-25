@@ -2,10 +2,12 @@ import io
 
 from setuptools import find_packages, setup
 
+from profiles_backup import info
+
 with io.open('README.md', 'rt', encoding='utf8') as f:
     LONG_DESC = f.read()
 
-VERSION = '0.0.4'
+VERSION = info.VERSION
 
 setup(
     name='profiles-backup',

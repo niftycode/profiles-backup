@@ -1,5 +1,5 @@
 # Develeopment requirements
 -r requirements.txt
-pytest~=6.2.5
+pytest~=7.1.2
 flake8~=4.0.1
-setuptools~=57.4.0
+setuptools~=58.1.0

@@ -6,7 +6,7 @@
 Common methods
 Python 3.8+
 Date created: April 28th, 2020
-Date modified: August 6th, 2021
+Date modified: June 25th, 2022
 """
 
 import getpass
@@ -80,8 +80,9 @@ def default_release_directory(installed_os):
     else:
         profiles_path = platform_paths["Windows 10"]
 
-    for item in os.listdir(profiles_path):
-        print(f"ITEMS: {item}")
+    # Show available profiles (dir names)
+    # for item in os.listdir(profiles_path):
+    #     print(f"ITEMS: {item}")
 
     try:
         for item in os.listdir(profiles_path):

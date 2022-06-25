@@ -6,7 +6,7 @@
 Backup Thunderbird's Profiles Folder
 Python 3.8+
 Date created: April 25th, 2020
-Date modified: August 6th, 2021
+Date modified: June 25th, 2022
 """
 
 import datetime
@@ -15,9 +15,8 @@ import logging
 import os
 import shutil
 import sys
-from distutils.dir_util import copy_tree
-# TODO: copy_tree is deprecated
-# Use shutil.copytree instead?
+# from distutils.dir_util import copy_tree
+
 
 from profiles_backup import clean_data, common, info
 
@@ -45,10 +44,10 @@ def check_default_profile() -> tuple:
 
 def show_default_path():
     """
-    Invoke check_process() to get the operating system and
+    Invoke check_default_profile() to get the operating system and
     the default directory.
     """
-    common.check_process()
+    # common.check_process()
     operating_system, _, default_folder = check_default_profile()
 
     print()
@@ -198,7 +197,8 @@ def restore_data(backup_item: str) -> None:
 
     # Copy data to destination folder
     try:
-        copy_tree(src, dst)
+        # copy_tree(src, dst)
+        shutil.copytree(src, dst, symlinks=False)
     except OSError as e:
         print(f"Creation of the directory {dst} failed")
         print(f"Error message: {e}")
