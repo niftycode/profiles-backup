@@ -34,6 +34,42 @@ def system_info() -> str:
     return operating_system
 
 
+def check_default_profile() -> tuple:
+    """
+    Call functions to check the operating system, Thunderbird's directory and
+    the path to the user's default-release directory.
+    :return: A tuple containing the OS, Thunderbird's Profiles folder and
+    the user's xyz.default folder.
+    """
+
+    operating_system = common.system_info()
+    thunderbird_dir = common.thunderbird_directory(operating_system)
+    default_release_dir = common.default_release_directory(operating_system)
+
+    logging.debug(f"OS: {operating_system}")
+    logging.debug(f"Thunderbird directory: {thunderbird_dir}")
+    logging.debug(f"Profiles directory: {default_release_dir}")
+
+    return operating_system, thunderbird_dir, default_release_dir
+
+
+def show_default_path():
+    """
+    Invoke check_default_profile() to get the operating system and
+    the default directory.
+    """
+    # common.check_process()
+    operating_system, _, default_folder = check_default_profile()
+
+    print()
+    print("--------------------------------------------------------------")
+    print(f"You are running a {operating_system} system.")
+    print("Your default profile directory is located in:")
+    print(f"{default_folder}")
+    print("--------------------------------------------------------------")
+    print()
+
+
 def thunderbird_directory(installed_os) -> str:
     """
     Returns the path to the Thunderbird directory
@@ -172,3 +208,9 @@ def check_process() -> bool:
     :return: 'true' or 'false'
     """
     return "thunderbird" in (p.name() for p in psutil.process_iter())
+
+
+def quit_application():
+    """Quit the application."""
+    print("Goodbye!")
+    sys.exit()
