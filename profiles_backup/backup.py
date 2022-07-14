@@ -31,9 +31,6 @@ def backup():
         print("Thunderbird is running! Quit Thunderbird and restart this program.")
         sys.exit()
 
-    # Check for old Backups and delete them
-    clean_data.delete_old_profiles()
-
     # Get the path of the source folder (Thunderbird folder)
     _, _, src = common.check_default_profile()
     logging.debug(f"Source folder: {src}")
@@ -67,3 +64,6 @@ def backup():
     else:
         print("Successfully created the backup!")
         print(f"You can find the backup data in {dst}")
+
+    # Check for old Backups and delete them
+    clean_data.delete_old_profiles()

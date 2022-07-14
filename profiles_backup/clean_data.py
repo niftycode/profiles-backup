@@ -21,7 +21,6 @@ def sorting(director_name) -> tuple:
 
 
 def delete_old_profiles() -> None:
-
     # Current operating system
     operating_system = common.system_info()
 
@@ -42,13 +41,14 @@ def delete_old_profiles() -> None:
 
         backups_to_delete = len(temp_list) - 5
 
+        print()
+        print("Delete old backups:")
         for j in temp_list:
             while backups_to_delete > 0:
-                print(f"delete backup: {j}")
+                print(f"deleted backup: {j}")
                 backup_to_delete_dir = backup_path + "/" + j
                 shutil.rmtree(backup_to_delete_dir)
                 backups_to_delete -= 1
                 break
-
     else:
-        print("A backup directory doesn't exists. Nothing to clean up!")
+        print("No old backups available. Nothing to clean up!")

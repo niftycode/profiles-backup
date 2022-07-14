@@ -16,7 +16,7 @@ import logging
 import platform
 import psutil
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 
 def system_info() -> str:
@@ -60,7 +60,6 @@ def show_default_path():
     Invoke check_default_profile() to get the operating system and
     the default directory.
     """
-    # common.check_process()
     operating_system, _, default_folder = check_default_profile()
 
     print()

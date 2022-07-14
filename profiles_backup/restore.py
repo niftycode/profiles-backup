@@ -100,18 +100,25 @@ def restore_data(backup_item: str) -> None:
     src = documents + backup_item[4:]
     logging.debug(f"Source folder: {src}")
 
-    # Get the path of the destination folder (Thunderbird folder)
-    _, dst, _ = common.check_default_profile()
-    logging.debug(f"Destination folder: {dst}")
+    # Get the path of the destination directory
+    # (Thunderbird's Profiles directory)
+    _, _, dst = common.check_default_profile()
 
-    # Copy data to destination folder
     try:
-        # copy_tree(src, dst)
-        shutil.copytree(src, dst, symlinks=False)
+        print(f"Source directory: {src}")
+        shutil.copytree(src,
+                        dst,
+                        dirs_exist_ok=True,
+                        copy_function=shutil.copy2,
+                        symlinks=False)
     except OSError as e:
-        print(f"Creation of the directory {dst} failed")
+        print(f"Cannot restore data to destination directory: {dst}")
         print(f"Error message: {e}")
         sys.exit("Program terminated!")
     else:
-        print("Successfully restored the backup!")
-        print(f"You can find the backup data in {dst}")
+        print()
+        print("------------------------------------------------------------")
+        print("Successfully restored the data!")
+        print(f"You can find the restored data in {dst}")
+        print("------------------------------------------------------------")
+

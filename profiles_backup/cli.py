@@ -79,7 +79,6 @@ def main():
     The entry point of this program.
     """
     args = get_arguments()
-    logging.debug(args)
 
     if args.path:
         common.show_default_path()
