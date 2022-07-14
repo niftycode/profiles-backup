@@ -4,8 +4,9 @@
 """
 Backup Thunderbird's Profiles Folder
 Python 3.8+
+Author: @niftycode
 Date created: April 25th, 2020
-Date modified: June 25th, 2022
+Date modified: July 14th, 2022
 """
 
 import argparse
@@ -15,7 +16,7 @@ from typing import NamedTuple
 
 from profiles_backup import common, info, backup, restore
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 
 class Args(NamedTuple):
@@ -29,6 +30,7 @@ class Args(NamedTuple):
 def get_arguments() -> Args:
     """
     Get command-line arguments
+
     Returns: arguments
     """
     parser = argparse.ArgumentParser(

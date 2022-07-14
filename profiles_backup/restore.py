@@ -4,7 +4,7 @@
 """
 Restore Thunderbird's Profiles Folder
 Python 3.8+
-Date created: July 13th, 2022
+Date created: July 14th, 2022
 Date modified: -
 """
 

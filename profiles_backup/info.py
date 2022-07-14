@@ -6,7 +6,7 @@
 App info, license, version
 Python 3.7+
 Date created: May 27th, 2020
-Date modified: July 13th, 2022
+Date modified: July 14th, 2022
 """
 
 import sys

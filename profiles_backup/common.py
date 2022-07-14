@@ -6,7 +6,7 @@
 Common methods
 Python 3.8+
 Date created: April 28th, 2020
-Date modified: June 25th, 2022
+Date modified: July 14th, 2022
 """
 
 import os
