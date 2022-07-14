@@ -15,6 +15,9 @@ VERSION = "0.1.0"
 
 
 def app_info():
+    """
+    Show information about this program.
+    """
     print("\n\n   ###### Backup Thunderbird's Profiles Folder #####")
     print("   #              Created by niftycode             #")
     print(f"   #                 Version {VERSION}                 #")

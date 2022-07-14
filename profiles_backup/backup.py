@@ -20,7 +20,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 def backup():
     """
-    If necessary, create the 'Thunderbird-Backup' directory in the user's
+    If necessary, create the "Thunderbird-Backup" directory in the user's
     Documents directory and copy all user data into this directory.
     The default directory can be recognized by the 'default-release' suffix.
     """

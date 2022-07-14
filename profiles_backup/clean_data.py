@@ -6,7 +6,7 @@
 Check for old profiles in the backup folder.
 Python 3.8+
 Date created: February 19th, 2021
-Date modified: August 5th, 2021
+Date modified: July 14th, 2022
 """
 
 import os
@@ -16,11 +16,24 @@ from profiles_backup import common
 
 
 def sorting(director_name) -> tuple:
+    """
+    Sorts the directories containing the backed up data.
+
+    Args:
+        director_name: Directory conatinaing backed up data.
+
+    Returns: Sorted directories
+
+    """
     splitup = director_name.split("-")
     return splitup[3], splitup[2], splitup[1]
 
 
 def delete_old_profiles() -> None:
+    """
+    There should only ever be five saved profiles.
+    Older profiles will be deleted.
+    """
     # Current operating system
     operating_system = common.system_info()
 
@@ -38,7 +51,6 @@ def delete_old_profiles() -> None:
                 temp_list.append(i)
 
         temp_list = sorted(temp_list, key=sorting)
-
         backups_to_delete = len(temp_list) - 5
 
         print()

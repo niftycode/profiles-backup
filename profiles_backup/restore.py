@@ -12,11 +12,8 @@ import os
 import sys
 import shutil
 import getpass
-import logging
 
 from profiles_backup import common
-
-logging.basicConfig(level=logging.DEBUG)
 
 
 def restore_from_documents():
@@ -24,7 +21,6 @@ def restore_from_documents():
     Check if Thunderbird is not running,
     show available backups and
     let the user chose a saved profile folder.
-    (Invoke the 'restore_data()' function.)
     """
     is_running = common.check_process()
     if is_running:
@@ -86,19 +82,16 @@ def restore_from_documents():
 
 
 def restore_data(backup_item: str) -> None:
-    """Restore a backuped Profiles folder.
+    """ Restore a backuped Profiles folder.
 
     Args:
-        backup_item (str): The name of the folder, saved
-        in the directory 'Thunderbird-Backup'.
+        backup_item: The name of the source directory,
+        saved in "Thunderbird-Backup".
     """
-    logging.debug("Restore data...")
-    logging.debug(f"Backup: {backup_item}")
 
     # Get the path of the source folder
     documents = "/Users/{0}/Documents/Thunderbird-Backup/".format(getpass.getuser())
     src = documents + backup_item[4:]
-    logging.debug(f"Source folder: {src}")
 
     # Get the path of the destination directory
     # (Thunderbird's Profiles directory)
@@ -121,4 +114,3 @@ def restore_data(backup_item: str) -> None:
         print("Successfully restored the data!")
         print(f"You can find the restored data in {dst}")
         print("------------------------------------------------------------")
-
