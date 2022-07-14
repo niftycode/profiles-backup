@@ -9,12 +9,14 @@ Date created: April 28th, 2020
 Date modified: June 25th, 2022
 """
 
-import getpass
 import os
-import platform
 import sys
-
+import getpass
+import logging
+import platform
 import psutil
+
+logging.basicConfig(level=logging.DEBUG)
 
 
 def system_info() -> str:
@@ -42,9 +44,9 @@ def check_default_profile() -> tuple:
     the user's xyz.default folder.
     """
 
-    operating_system = common.system_info()
-    thunderbird_dir = common.thunderbird_directory(operating_system)
-    default_release_dir = common.default_release_directory(operating_system)
+    operating_system = system_info()
+    thunderbird_dir = thunderbird_directory(operating_system)
+    default_release_dir = default_release_directory(operating_system)
 
     logging.debug(f"OS: {operating_system}")
     logging.debug(f"Thunderbird directory: {thunderbird_dir}")

@@ -13,7 +13,7 @@ import logging
 
 from typing import NamedTuple
 
-from profiles_backup import common, info, backup
+from profiles_backup import common, info, backup, restore
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -24,44 +24,6 @@ class Args(NamedTuple):
     backup: bool
     restore: bool
     version: bool
-
-
-def user_input():
-    """
-    Check user input
-    """
-    print()
-    print("----------------------------------------------------------")
-    print("What do you want to do?")
-    print()
-    print("-1- Show the path of the default profile")
-    print("-2- Backup the default profile")
-    print("-3- Restore the default profile")
-    print("-4- Show version")
-    print("-5- Quit the application")
-    print("----------------------------------------------------------")
-
-    while True:
-        choice = input("Your choice: ")
-
-        if choice == "1":
-            show_default_path()
-            break
-        elif choice == "2":
-            backup()
-            break
-        elif choice == "3":
-            restore_from_documents()
-            break
-        elif choice == "4":
-            info.app_info()
-            break
-        elif choice == "5":
-            quit_application()
-
-        else:
-            print("Unknown input! Try again.")
-            continue
 
 
 def get_arguments() -> Args:
@@ -126,7 +88,7 @@ def main():
         backup.backup()
 
     if args.restore:
-        logging.debug("invoke restore")
+        restore.restore_from_documents()
 
     if args.version:
         info.app_info()
