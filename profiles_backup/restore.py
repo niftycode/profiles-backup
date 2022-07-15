@@ -82,7 +82,7 @@ def restore_from_documents():
 
 
 def restore_data(backup_item: str) -> None:
-    """ Restore a backuped Profiles folder.
+    """Restore a backuped Profiles folder.
 
     Args:
         backup_item: The name of the source directory,
@@ -99,11 +99,9 @@ def restore_data(backup_item: str) -> None:
 
     try:
         print(f"Source directory: {src}")
-        shutil.copytree(src,
-                        dst,
-                        dirs_exist_ok=True,
-                        copy_function=shutil.copy2,
-                        symlinks=False)
+        shutil.copytree(
+            src, dst, dirs_exist_ok=True, copy_function=shutil.copy2, symlinks=False
+        )
     except OSError as e:
         print(f"Cannot restore data to destination directory: {dst}")
         print(f"Error message: {e}")

@@ -21,6 +21,7 @@ logging.basicConfig(level=logging.INFO)
 
 class Args(NamedTuple):
     """Command-line arguments"""
+
     path: bool
     backup: bool
     restore: bool
@@ -35,44 +36,32 @@ def get_arguments() -> Args:
     """
     parser = argparse.ArgumentParser(
         description="Backup Thunderbird's profiles directory.",
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
 
     parser.add_argument(
         "-p",
         "--path",
         help="Show the path of the default profile.",
-        action="store_true"
+        action="store_true",
     )
 
     parser.add_argument(
-        "-b",
-        "--backup",
-        help="Backup the profiles directory.",
-        action="store_true"
+        "-b", "--backup", help="Backup the profiles directory.", action="store_true"
     )
 
     parser.add_argument(
-        "-r",
-        "--restore",
-        help="Restore the profiles directory.",
-        action="store_true"
+        "-r", "--restore", help="Restore the profiles directory.", action="store_true"
     )
 
     parser.add_argument(
-        "-v",
-        "--version",
-        help="Show the current version.",
-        action="store_true"
+        "-v", "--version", help="Show the current version.", action="store_true"
     )
 
     args = parser.parse_args()
 
     return Args(
-        path=args.path,
-        backup=args.backup,
-        restore=args.restore,
-        version=args.version
+        path=args.path, backup=args.backup, restore=args.restore, version=args.version
     )
 
 

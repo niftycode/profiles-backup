@@ -14,7 +14,7 @@ import sys
 import getpass
 import logging
 import platform
-import psutil
+import psutil  # type: ignore
 
 logging.basicConfig(level=logging.INFO)
 
