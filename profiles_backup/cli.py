@@ -12,13 +12,15 @@ Date modified: July 14th, 2022
 import argparse
 import logging
 
-from typing import NamedTuple
+from argparse import Namespace
 
 from profiles_backup import common, info, backup, restore
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 
 
+# TODO: Delete in upcoming version
+'''
 class Args(NamedTuple):
     """Command-line arguments"""
 
@@ -26,13 +28,14 @@ class Args(NamedTuple):
     backup: bool
     restore: bool
     version: bool
+'''
 
 
-def get_arguments() -> Args:
+def create_parser() -> argparse.ArgumentParser:
     """
-    Get command-line arguments
+    Create a command-line parser
 
-    Returns: arguments
+    Returns: parser
     """
     parser = argparse.ArgumentParser(
         description="Backup Thunderbird's profiles directory.",
@@ -42,35 +45,31 @@ def get_arguments() -> Args:
     parser.add_argument(
         "-p",
         "--path",
-        help="Show the path of the default profile.",
+        help="show the path of the default profile",
         action="store_true",
     )
 
     parser.add_argument(
-        "-b", "--backup", help="Backup the profiles directory.", action="store_true"
+        "-b", "--backup", help="backup the profiles directory", action="store_true"
     )
 
     parser.add_argument(
-        "-r", "--restore", help="Restore the profiles directory.", action="store_true"
+        "-r", "--restore", help="restore the profiles directory", action="store_true"
     )
 
     parser.add_argument(
-        "-v", "--version", help="Show the current version.", action="store_true"
+        "-v", "--version", help="show the current version.", action="store_true"
     )
 
-    args = parser.parse_args()
-
-    return Args(
-        path=args.path, backup=args.backup, restore=args.restore, version=args.version
-    )
+    return parser
 
 
-def main():
+def evaluate_arguments(args: Namespace):
     """
-    The entry point of this program.
+    Evaluate the given argument
+    Args:
+        args: given arguments
     """
-    args = get_arguments()
-
     if args.path:
         common.show_default_path()
 
@@ -82,6 +81,15 @@ def main():
 
     if args.version:
         info.app_info()
+
+
+def main():
+    """
+    The entry point of this program.
+    """
+    parser = create_parser()
+    args = parser.parse_args()
+    evaluate_arguments(args)
 
 
 if __name__ == "__main__":
