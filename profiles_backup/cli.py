@@ -19,18 +19,6 @@ from profiles_backup import common, info, backup, restore
 logging.basicConfig(level=logging.DEBUG)
 
 
-# TODO: Delete in upcoming version
-'''
-class Args(NamedTuple):
-    """Command-line arguments"""
-
-    path: bool
-    backup: bool
-    restore: bool
-    version: bool
-'''
-
-
 def create_parser() -> argparse.ArgumentParser:
     """
     Create a command-line parser
